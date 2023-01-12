@@ -71,7 +71,7 @@ export class GuestUserStack extends Stack {
     }
 
     // The after step (simply return the result)
-    export function response() {
+    export function response(ctx) {
       return ctx.prev.result
     }
   `),
