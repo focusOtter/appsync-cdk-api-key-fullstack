@@ -51,7 +51,7 @@ export class GuestUserBackendStack extends Stack {
 		api.addDynamoDbDataSource('listUsers', userTable)
 
 		// Create the AppSync function
-		const myJsFunction = new AppsyncFunction(this, 'listUsersFunction', {
+		const listUsersFunction = new AppsyncFunction(this, 'listUsersFunction', {
 			name: 'listUsersFunction',
 			api,
 			dataSource: api.addDynamoDbDataSource('listUsers', userTable),
@@ -76,7 +76,7 @@ export class GuestUserBackendStack extends Stack {
     }
   `),
 			runtime: FunctionRuntime.JS_1_0_0,
-			pipelineConfig: [myJsFunction],
+			pipelineConfig: [listUsersFunction],
 		})
 
 		const addUserLambda = new Function(this, 'addUserFunction', {
