@@ -40,7 +40,7 @@ export default function Home({ users = [], nextToken }) {
 				query: fetchUsersQuery,
 				variables: {
 					limit: 5,
-					nextToken: pageTokens[0],
+					nextToken: pageTokens[currentPageIndex - 1],
 				},
 			})
 
