@@ -1,0 +1,15 @@
+type Query {
+	listUsers(limit: Int, nextToken: String): UserConnection
+}
+
+type User {
+	userId: ID!
+	firstname: String!
+	lastname: String!
+	picture: AWSURL!
+}
+
+type UserConnection {
+	items: [User!]
+	nextToken: String
+}
