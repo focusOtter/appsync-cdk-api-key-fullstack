@@ -24,18 +24,18 @@ import { Schedule, Rule } from 'aws-cdk-lib/aws-events'
 import { LambdaFunction } from 'aws-cdk-lib/aws-events-targets'
 import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda'
 
-export class GuestUserBackendStack extends Stack {
+export class GuestUserStack extends Stack {
 	constructor(scope: Construct, id: string, props?: StackProps) {
 		super(scope, id, props)
 
-		const userTable = new Table(this, 'User Table', {
+		const userTable = new Table(this, 'UsersAPITable', {
 			removalPolicy: RemovalPolicy.DESTROY,
 			billingMode: BillingMode.PAY_PER_REQUEST,
 			partitionKey: { name: 'userId', type: AttributeType.STRING },
 		})
 
-		const api = new GraphqlApi(this, 'User API', {
-			name: 'User API',
+		const api = new GraphqlApi(this, 'UsersAPI', {
+			name: 'UsersAPI',
 			schema: SchemaFile.fromAsset(path.join(__dirname, 'schema.graphql')),
 			authorizationConfig: {
 				defaultAuthorization: {
@@ -47,8 +47,6 @@ export class GuestUserBackendStack extends Stack {
 			},
 			xrayEnabled: true,
 		})
-
-		api.addDynamoDbDataSource('listUsers', userTable)
 
 		// Create the AppSync function
 		const listUsersFunction = new AppsyncFunction(this, 'listUsersFunction', {
