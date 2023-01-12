@@ -53,7 +53,7 @@ export class GuestUserStack extends Stack {
 			name: 'listUsersFunction',
 			api,
 			dataSource: api.addDynamoDbDataSource('listUsers', userTable),
-			code: AppSyncCode.fromAsset('mappings/Query.listUsers.js'),
+			code: AppSyncCode.fromAsset('./mappings/Query.listUsers.js'),
 			runtime: FunctionRuntime.JS_1_0_0,
 		})
 
