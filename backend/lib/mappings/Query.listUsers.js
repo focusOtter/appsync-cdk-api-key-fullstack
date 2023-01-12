@@ -15,7 +15,7 @@ export function request(ctx) {
 
 export function response(ctx) {
 	const response = { items: ctx.result.items }
-	const nextToken = ctx.args.nextToken
+	const nextToken = ctx.result.nextToken
 	if (nextToken) {
 		response.nextToken = ctx.result.nextToken
 	}
